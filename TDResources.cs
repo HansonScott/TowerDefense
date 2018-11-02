@@ -106,7 +106,7 @@ namespace TowerDefense
 
             for (int x = 1; x <= t.Columns.Count; x++)
             {
-                for (int y = 1; y <= t.Rows.Count; y++)
+                for (int y = 2; y <= t.Rows.Count; y++) // start at 2 because of the 'name' row
                 {
                     string val = t.Rows[y - 1][x - 1].ToString().ToLower();
 
@@ -125,13 +125,14 @@ namespace TowerDefense
         private static List<TDAttacker> LoadAttackers()
         {
             ClaimRemedi.ExcelReader.Reader r = new ClaimRemedi.ExcelReader.Reader("Attackers.xls");
+            r.FirstLineIsHeader = true;
             DataSet data = r.ReadAllData();
 
             foreach (DataTable t in data.Tables)
             {
                 switch (t.TableName)
                 {
-                    case "Attackers":
+                    case "Attackers$":
                         return LoadAttackersTable(t);
                     default:
                         break;
