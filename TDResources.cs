@@ -27,8 +27,9 @@ namespace TowerDefense
             DataSet data;
             try
             {
-                ExcelReader.Reader r = new ExcelReader.Reader("Maps.xls");
-                data = r.Read();
+                ClaimRemedi.ExcelReader.Reader r = new ClaimRemedi.ExcelReader.Reader("Maps.xls");
+                //r.FirstLineIsHeader = true;
+                data = r.ReadAllData();
             }
             catch(Exception e)
             {
@@ -123,8 +124,8 @@ namespace TowerDefense
         #region Attackers loading
         private static List<TDAttacker> LoadAttackers()
         {
-            ExcelReader.Reader r = new ExcelReader.Reader("Attackers.xls");
-            DataSet data = r.Read();
+            ClaimRemedi.ExcelReader.Reader r = new ClaimRemedi.ExcelReader.Reader("Attackers.xls");
+            DataSet data = r.ReadAllData();
 
             foreach (DataTable t in data.Tables)
             {
