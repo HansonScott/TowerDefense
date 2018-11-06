@@ -305,6 +305,7 @@ namespace TowerDefense
         }
         internal void DrawAmmo(Graphics g)
         {
+
             foreach (TDAmmo a in this.Ammo)
             {
                 a.DrawSelf(g);

@@ -51,12 +51,13 @@ namespace TowerDefense
         #region Public Fields
         public Panel panelAction;
         public Panel panelTools;
-        public Graphics ActionGraphics;
-        public Graphics ActionBackGraphics;
-        public Bitmap ActionBackImage;
-        public Graphics ToolsGraphics;
         public TDEntity CurrentlySelectedEntity;
         public Point CursorPosition;
+
+        public static int MaxFPS = 50;
+        public static TDTower placementTower = null;
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private BufferedGraphics bufferedGraphics;
         #endregion
 
         #region Constructor
@@ -65,27 +66,30 @@ namespace TowerDefense
             ThisForm = this; // for component and cross thread references
 
             InitializeComponent();
-            this.DoubleBuffered = true; // tried to help speed up drawing, but it is not effective.
-
-            ResetActionGraphics();
-
-            // more drawing speed attempts, still not effective.
-            this.ActionGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            this.ToolsGraphics = this.panelTools.CreateGraphics();
-            this.ToolsGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
 
             // read files
             TDResources.LoadResources();
 
             SetupNewSession();
+
+            // setup drawing details
+            BufferedGraphicsContext context = BufferedGraphicsManager.Current;
+            context.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
+            bufferedGraphics = context.Allocate(this.CreateGraphics(),
+            new Rectangle(0, 0, this.Width, this.Height));
+            timer.Enabled = true;
+            timer.Tick += OnTimer;
+            timer.Interval = (1000/MaxFPS);
+            timer.Start();
+        }
+        private void OnTimer(object sender, System.EventArgs e)
+        {
+            DrawActionPanel(bufferedGraphics.Graphics);
+            bufferedGraphics.Render(this.panelAction.CreateGraphics());
         }
 
         public void ResetActionGraphics()
         {
-            this.ActionGraphics = this.panelAction.CreateGraphics();
-            ActionBackImage = new Bitmap(this.panelAction.Width, panelAction.Height);
-            this.ActionBackGraphics = Graphics.FromImage(ActionBackImage);
-
             if (TDSession.thisSession != null &&
                 TDSession.thisSession.CurrentLevel != null &&
                 TDSession.thisSession.CurrentLevel.Map != null)
@@ -95,9 +99,14 @@ namespace TowerDefense
         }
         private void SetupNewSession()
         {
+            // clear out old thread, if it exists
             if (TDSession.thisSession != null)
             {
                 TDSession.thisSession.End();
+                if (SessionThread != null)
+                {
+                    SessionThread.Join();
+                }
             }
 
             TDSession.thisSession = new TDSession();
@@ -269,7 +278,13 @@ namespace TowerDefense
         {
             ResetActionGraphics();
         }
-        
+
+        private void panelAction_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.CursorPosition = e.Location;
+        }
+
+        #region Upgrade Buttons
         private void btnUpgrade_Click(object sender, EventArgs e)
         {
             // pop upgrade box - idea rejected
@@ -291,7 +306,9 @@ namespace TowerDefense
             TDSession.thisSession.gold -= this.CurrentlySelectedEntity.RepairCost();
             this.CurrentlySelectedEntity.HPCurrent = this.CurrentlySelectedEntity.HPMax;
         }
+        #endregion
 
+        #region AI Buttons
         private void btnAI_First_Click(object sender, EventArgs e)
         {
             (this.CurrentlySelectedEntity as TDTower).AISetting = TDTower.AISettings.First;
@@ -316,20 +333,7 @@ namespace TowerDefense
         {
             (this.CurrentlySelectedEntity as TDTower).AISetting = TDTower.AISettings.Far;
         }
-
-        private void panelAction_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.CursorPosition = e.Location;
-        }
-        private void panelAction_MouseEnter(object sender, EventArgs e)
-        {
-        }
-        private void panelAction_MouseLeave(object sender, EventArgs e)
-        {
-        }
-        private void panelAction_Paint(object sender, PaintEventArgs e)
-        {
-        }
+        #endregion
 
         #region Speed Buttons
         private void btnSpeed_Paused_Click(object sender, EventArgs e)
@@ -732,6 +736,35 @@ namespace TowerDefense
                 SetControlState(btnAIWeak, false);
                 SetControlState(btnAIClose, false);
                 SetControlState(btnAIFar, false);
+            }
+        }
+        #endregion
+
+        #region Drawing actionPanel
+        private void DrawActionPanel(Graphics g)
+        {
+            // draw
+            if (TDSession.thisSession != null &&
+                TDSession.thisSession.CurrentLevel != null)
+            {
+                // tell the level to draw itself to the back graphics
+                TDSession.thisSession.CurrentLevel.DrawSelf(g);
+
+                // draw a tower on the cursor
+                if (TDForm.ThisForm.CursorState == TDForm.CursorStates.PlaceTower &&
+                    placementTower != null)
+                {
+                    if (TDSession.thisSession.CurrentLevel.CanPlaceTower(placementTower))
+                    {
+                        placementTower.MainColor = Color.Blue;
+                    }
+                    else
+                    {
+                        placementTower.MainColor = Color.Red;
+                    }
+
+                    placementTower.DrawSelf(g, TDForm.ThisForm.CursorPosition);
+                }
             }
         }
         #endregion

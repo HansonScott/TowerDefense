@@ -71,12 +71,12 @@ namespace TowerDefense
                 else if (TDForm.ThisForm.CursorState == TDForm.CursorStates.Normal)
                 {
                     TDForm.ThisForm.CursorState = TDForm.CursorStates.PlaceTower;
-                    TDSession.thisSession.placementTower = this.Tower;
+                    TDForm.placementTower = this.Tower;
                 }
                 // we are already placing a tower, but we changed which tower to place
                 else if (TDForm.ThisForm.CursorState == TDForm.CursorStates.PlaceTower)
                 {
-                    TDSession.thisSession.placementTower = this.Tower;
+                    TDForm.placementTower = this.Tower;
                 }
             }
             else

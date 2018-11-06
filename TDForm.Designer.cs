@@ -100,9 +100,6 @@
             this.panelAction.Size = new System.Drawing.Size(853, 658);
             this.panelAction.TabIndex = 0;
             this.panelAction.Click += new System.EventHandler(this.panelAction_Click);
-            this.panelAction.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAction_Paint);
-            this.panelAction.MouseEnter += new System.EventHandler(this.panelAction_MouseEnter);
-            this.panelAction.MouseLeave += new System.EventHandler(this.panelAction_MouseLeave);
             this.panelAction.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelAction_MouseMove);
             // 
             // panelTools
@@ -225,6 +222,7 @@
             // 
             // lbl_Detail_Speed
             // 
+            this.lbl_Detail_Speed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Detail_Speed.AutoSize = true;
             this.lbl_Detail_Speed.Location = new System.Drawing.Point(147, 379);
             this.lbl_Detail_Speed.Name = "lbl_Detail_Speed";
@@ -235,6 +233,7 @@
             // 
             // label12
             // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(90, 379);
             this.label12.Name = "label12";
@@ -244,6 +243,7 @@
             // 
             // lblDetail_AI
             // 
+            this.lblDetail_AI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetail_AI.AutoSize = true;
             this.lblDetail_AI.Location = new System.Drawing.Point(118, 405);
             this.lblDetail_AI.Name = "lblDetail_AI";
@@ -254,6 +254,7 @@
             // 
             // label15
             // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(92, 405);
             this.label15.Name = "label15";
@@ -263,8 +264,7 @@
             // 
             // btnAIFar
             // 
-            this.btnAIFar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAIFar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAIFar.Enabled = false;
             this.btnAIFar.Location = new System.Drawing.Point(95, 503);
             this.btnAIFar.Name = "btnAIFar";
@@ -276,8 +276,7 @@
             // 
             // btnAIClose
             // 
-            this.btnAIClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAIClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAIClose.Enabled = false;
             this.btnAIClose.Location = new System.Drawing.Point(8, 503);
             this.btnAIClose.Name = "btnAIClose";
@@ -289,8 +288,7 @@
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(46, 539);
             this.label8.Name = "label8";
@@ -300,8 +298,7 @@
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(64, 429);
             this.label5.Name = "label5";
@@ -311,8 +308,7 @@
             // 
             // btnAIWeak
             // 
-            this.btnAIWeak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAIWeak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAIWeak.Enabled = false;
             this.btnAIWeak.Location = new System.Drawing.Point(95, 474);
             this.btnAIWeak.Name = "btnAIWeak";
@@ -324,8 +320,7 @@
             // 
             // btnAIStrong
             // 
-            this.btnAIStrong.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAIStrong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAIStrong.Enabled = false;
             this.btnAIStrong.Location = new System.Drawing.Point(8, 474);
             this.btnAIStrong.Name = "btnAIStrong";
@@ -337,8 +332,7 @@
             // 
             // btnAILast
             // 
-            this.btnAILast.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAILast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAILast.Enabled = false;
             this.btnAILast.Location = new System.Drawing.Point(95, 445);
             this.btnAILast.Name = "btnAILast";
@@ -350,8 +344,7 @@
             // 
             // btnAI_First
             // 
-            this.btnAI_First.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAI_First.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAI_First.Enabled = false;
             this.btnAI_First.Location = new System.Drawing.Point(8, 445);
             this.btnAI_First.Name = "btnAI_First";
@@ -363,8 +356,7 @@
             // 
             // btn_Repair
             // 
-            this.btn_Repair.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Repair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Repair.Enabled = false;
             this.btn_Repair.Location = new System.Drawing.Point(5, 555);
             this.btn_Repair.Name = "btn_Repair";
@@ -376,6 +368,7 @@
             // 
             // lblDetailsSplashRadius
             // 
+            this.lblDetailsSplashRadius.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailsSplashRadius.AutoSize = true;
             this.lblDetailsSplashRadius.Location = new System.Drawing.Point(61, 405);
             this.lblDetailsSplashRadius.Name = "lblDetailsSplashRadius";
@@ -385,6 +378,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 405);
             this.label6.Name = "label6";
@@ -394,6 +388,7 @@
             // 
             // label14
             // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(29, 317);
             this.label14.Name = "label14";
@@ -403,8 +398,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
             this.btnDelete.Location = new System.Drawing.Point(129, 555);
             this.btnDelete.Name = "btnDelete";
@@ -416,8 +410,7 @@
             // 
             // btnUpgrade
             // 
-            this.btnUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpgrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpgrade.Enabled = false;
             this.btnUpgrade.Location = new System.Drawing.Point(67, 555);
             this.btnUpgrade.Name = "btnUpgrade";
@@ -429,6 +422,7 @@
             // 
             // lblDetailsFireRate
             // 
+            this.lblDetailsFireRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailsFireRate.AutoSize = true;
             this.lblDetailsFireRate.Location = new System.Drawing.Point(61, 392);
             this.lblDetailsFireRate.Name = "lblDetailsFireRate";
@@ -438,6 +432,7 @@
             // 
             // label13
             // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(12, 392);
             this.label13.Name = "label13";
@@ -447,6 +442,7 @@
             // 
             // lblDetailRange
             // 
+            this.lblDetailRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailRange.AutoSize = true;
             this.lblDetailRange.Location = new System.Drawing.Point(61, 379);
             this.lblDetailRange.Name = "lblDetailRange";
@@ -456,6 +452,7 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(12, 379);
             this.label11.Name = "label11";
@@ -465,6 +462,7 @@
             // 
             // lblDetailsDamage
             // 
+            this.lblDetailsDamage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailsDamage.AutoSize = true;
             this.lblDetailsDamage.Location = new System.Drawing.Point(61, 366);
             this.lblDetailsDamage.Name = "lblDetailsDamage";
@@ -474,6 +472,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(12, 366);
             this.label9.Name = "label9";
@@ -483,6 +482,7 @@
             // 
             // lblDetailsHP
             // 
+            this.lblDetailsHP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailsHP.AutoSize = true;
             this.lblDetailsHP.Location = new System.Drawing.Point(61, 353);
             this.lblDetailsHP.Name = "lblDetailsHP";
@@ -492,6 +492,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 353);
             this.label7.Name = "label7";
@@ -501,6 +502,7 @@
             // 
             // lblDetailName
             // 
+            this.lblDetailName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailName.AutoSize = true;
             this.lblDetailName.Location = new System.Drawing.Point(61, 340);
             this.lblDetailName.Name = "lblDetailName";
@@ -510,6 +512,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 340);
             this.label3.Name = "label3";

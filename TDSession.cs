@@ -16,8 +16,6 @@ namespace TowerDefense
         public static TDSession thisSession;
 
         static bool ShouldContinue = true;
-        static int MaxFPS = 50;        
-        public TDTower placementTower = null;
 
         private int _gold;
         public int gold
@@ -119,40 +117,13 @@ namespace TowerDefense
                     CurrentLevel.Update();
                 }
 
-                // draw
-                if (TDSession.thisSession != null &&
-                    TDSession.thisSession.CurrentLevel != null)
-                {
-                    // tell the level to draw itself
-                    TDSession.thisSession.CurrentLevel.DrawSelf(TDForm.ThisForm.ActionBackGraphics);
-
-                    // draw a tower on the cursor
-                    if(TDForm.ThisForm.CursorState == TDForm.CursorStates.PlaceTower &&
-                        placementTower != null)
-                    {
-                        if (TDSession.thisSession.CurrentLevel.CanPlaceTower(placementTower))
-                        {
-                            placementTower.MainColor = Color.Blue;
-                            placementTower.DrawSelf(TDForm.ThisForm.ActionBackGraphics, TDForm.ThisForm.CursorPosition);
-                        }
-                        else
-                        {
-                            placementTower.MainColor = Color.Red;
-                            placementTower.DrawSelf(TDForm.ThisForm.ActionBackGraphics, TDForm.ThisForm.CursorPosition);
-                        }
-                    }
-
-                    try
-                    {
-                        // transfer that back image to the main screen
-                        TDForm.ThisForm.ActionGraphics.DrawImage(TDForm.ThisForm.ActionBackImage, 0, 0);
-                    }
-                    catch { }
-                }
-
                 // delay looping for frame rate control
-                int delayMS = (int)Math.Max(0, ((1000 / MaxFPS) - (DateTime.Now - LastFrame).TotalMilliseconds));
-                Thread.Sleep(delayMS);
+                int delayMS = (int)Math.Max(0, ((1000 / TDForm.MaxFPS) - (DateTime.Now - LastFrame).TotalMilliseconds));
+
+                if (delayMS > 0)
+                {
+                    Thread.Sleep(delayMS);
+                }
 
                 LastFrame = DateTime.Now;
             }
