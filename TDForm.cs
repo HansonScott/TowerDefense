@@ -62,14 +62,19 @@ namespace TowerDefense
         #region Constructor
         public TDForm()
         {
-            ThisForm = this;
+            ThisForm = this; // for component and cross thread references
+
             InitializeComponent();
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = true; // tried to help speed up drawing, but it is not effective.
+
             ResetActionGraphics();
+
+            // more drawing speed attempts, still not effective.
             this.ActionGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
             this.ToolsGraphics = this.panelTools.CreateGraphics();
             this.ToolsGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
 
+            // read files
             TDResources.LoadResources();
 
             SetupNewSession();
@@ -197,6 +202,9 @@ namespace TowerDefense
             this.CursorState = CursorStates.DeleteTower;
         }
         
+        /// <summary>
+        /// The main panel's action event handler.
+        /// </summary>
         private void panelAction_Click(object sender, EventArgs e)
         {
             MouseEventArgs m = (e as MouseEventArgs);
@@ -264,7 +272,7 @@ namespace TowerDefense
         
         private void btnUpgrade_Click(object sender, EventArgs e)
         {
-            // pop upgrade box
+            // pop upgrade box - idea rejected
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -637,7 +645,8 @@ namespace TowerDefense
 
             // if selection is a tower, then reset detail buttons
             if (this.CurrentlySelectedEntity != null &&
-                this.CurrentlySelectedEntity is TDTower)
+                this.CurrentlySelectedEntity is TDTower &&
+                this.CurrentlySelectedEntity.DeleteMe == false)
             {
                 this.btnUpgrade.Enabled = true;
 
@@ -652,7 +661,7 @@ namespace TowerDefense
                     SetControlState(this.btn_Repair, TDSession.thisSession.gold >= this.CurrentlySelectedEntity.RepairCost());
                 }
             }
-            else // not a tower, don't allow anything.
+            else // not a valid tower, don't allow anything.
             {
                 SetControlState(this.btn_Repair,false);
                 SetControlState(this.btnUpgrade,false);
