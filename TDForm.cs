@@ -58,6 +58,7 @@ namespace TowerDefense
         public static TDTower placementTower = null;
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private BufferedGraphics bufferedGraphics;
+        private Graphics ActionPanelGraphics;
         #endregion
 
         #region Constructor
@@ -73,10 +74,10 @@ namespace TowerDefense
             SetupNewSession();
 
             // setup drawing details
+            ActionPanelGraphics = this.panelAction.CreateGraphics();
             BufferedGraphicsContext context = BufferedGraphicsManager.Current;
             context.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
-            bufferedGraphics = context.Allocate(this.CreateGraphics(),
-            new Rectangle(0, 0, this.Width, this.Height));
+            bufferedGraphics = context.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
             timer.Enabled = true;
             timer.Tick += OnTimer;
             timer.Interval = (1000/MaxFPS);
@@ -85,7 +86,7 @@ namespace TowerDefense
         private void OnTimer(object sender, System.EventArgs e)
         {
             DrawActionPanel(bufferedGraphics.Graphics);
-            bufferedGraphics.Render(this.panelAction.CreateGraphics());
+            bufferedGraphics.Render(ActionPanelGraphics);
         }
 
         public void ResetActionGraphics()

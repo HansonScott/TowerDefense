@@ -285,39 +285,54 @@ namespace TowerDefense
         {
             this.Map.Draw(g);
         }
+        #region Draw Sprites
         internal void DrawAttackers(Graphics g)
         {
-            foreach (TDAttacker a in this.Attackers)
+            // remain single threaded - tried Parallel but jumped the cpu
+            for (int i = 0; i < this.Attackers.Count; i++)
             {
-                a.DrawSelf(g);
+                if(this.Attackers[i] != null &&
+                    !this.Attackers[i].DeleteMe)
+                {
+                    this.Attackers[i].DrawSelf(g);
+                }
             }
         }
         internal void DrawTowers(Graphics g)
         {
-            try
+            for (int i = 0; i < this.Towers.Count; i++)
             {
-                foreach (TDTower t in this.Towers)
+                if (this.Towers[i] != null &&
+                    !this.Towers[i].DeleteMe)
                 {
-                    t.DrawSelf(g);
+                    this.Towers[i].DrawSelf(g);
                 }
             }
-            catch { }
         }
         internal void DrawAmmo(Graphics g)
         {
-
-            foreach (TDAmmo a in this.Ammo)
+            for (int i = 0; i < this.Ammo.Count; i++)
             {
-                a.DrawSelf(g);
+                if (this.Ammo[i] != null &&
+                    !this.Ammo[i].DeleteMe)
+                {
+                    this.Ammo[i].DrawSelf(g);
+                }
             }
         }
         internal void DrawExplosions(Graphics g)
         {
-            foreach (TDExplosion e in this.Explosions)
+            for (int i = 0; i < this.Explosions.Count; i++)
             {
-                e.DrawSelf(g);
+                if (this.Explosions[i] != null &&
+                    !this.Explosions[i].DeleteMe)
+                {
+                    this.Explosions[i].DrawSelf(g);
+                }
             }
         }
+        #endregion
+
         #region Effects
         internal void PauseAllEffects()
         {
