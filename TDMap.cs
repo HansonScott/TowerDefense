@@ -223,7 +223,7 @@ namespace TowerDefense
         internal void LoadMapData(TDMapTabData tab)
         {
             // colors, etc.
-            DataRow row = tab.Table.Rows[0];
+            DataRow row = tab.Table.Rows[1]; // first row is headers
 
             BackColor = ParseColor(row, TDMapTabData.ColumnNames.BackColor);
             PathColor = ParseColor(row, TDMapTabData.ColumnNames.PathColor);
@@ -234,10 +234,10 @@ namespace TowerDefense
             BaseImage = ParseImage(row, TDMapTabData.ColumnNames.BaseImage);
         }
 
-        private Image ParseImage(DataRow row, string col)
+        private Image ParseImage(DataRow row, int colIndex)
         {
             Image i = null;
-            string s = row[col].ToString();
+            string s = row[colIndex].ToString();
             if (!String.IsNullOrEmpty(s))
             {
                 if (!s.StartsWith("Images"))
@@ -256,9 +256,9 @@ namespace TowerDefense
             return i;
         }
 
-        private Color ParseColor(DataRow row, string col)
+        private Color ParseColor(DataRow row, int colIndex)
         {
-            string s = row[col].ToString();
+            string s = row[colIndex].ToString();
 
             Color c = Color.Gray;
             try

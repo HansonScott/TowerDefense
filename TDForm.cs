@@ -445,7 +445,7 @@ namespace TowerDefense
 
             TDSession.thisSession.End();
             TDSession.thisSession = null;
-            SessionThread.Join();
+            //SessionThread.Join();
         }
         public void SetLabelText(Label lbl, string text)
         {

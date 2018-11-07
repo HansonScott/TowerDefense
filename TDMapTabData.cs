@@ -30,13 +30,13 @@ namespace TowerDefense
 
         public class ColumnNames
         {
-            public const string Name = "Name";
-            public const string BackColor = "BackColor";
-            public const string BackImage = "BackImage";
-            public const string PathColor = "PathColor";
-            public const string PathImage = "PathImage";
-            public const string BaseColor = "BaseColor";
-            public const string BaseImage = "BaseImage";
+            public const int Name = 0;
+            public const int BackColor = 1;
+            public const int BackImage = 2;
+            public const int PathColor = 3;
+            public const int PathImage = 4;
+            public const int BaseColor = 5;
+            public const int BaseImage = 6;
         }
     }
 }
