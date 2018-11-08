@@ -55,8 +55,10 @@ namespace TowerDefense
         public Point CursorPosition;
 
         public static int MaxFPS = 50;
+        public static int MessageDuration = 2000;
         public static TDTower placementTower = null;
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer DrawTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer MessageTimer = new System.Windows.Forms.Timer();
         private BufferedGraphics bufferedGraphics;
         private Graphics ActionPanelGraphics;
         #endregion
@@ -78,12 +80,16 @@ namespace TowerDefense
             BufferedGraphicsContext context = BufferedGraphicsManager.Current;
             context.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
             bufferedGraphics = context.Allocate(this.CreateGraphics(), new Rectangle(0, 0, this.Width, this.Height));
-            timer.Enabled = true;
-            timer.Tick += OnTimer;
-            timer.Interval = (1000/MaxFPS);
-            timer.Start();
+            DrawTimer.Enabled = true;
+            DrawTimer.Tick += OnDrawTimer;
+            DrawTimer.Interval = (1000/MaxFPS);
+            DrawTimer.Start();
+
+            MessageTimer.Tick += MessageTimer_Tick;
+            MessageTimer.Interval = MessageDuration;
         }
-        private void OnTimer(object sender, System.EventArgs e)
+
+        private void OnDrawTimer(object sender, System.EventArgs e)
         {
             DrawActionPanel(bufferedGraphics.Graphics);
             bufferedGraphics.Render(ActionPanelGraphics);
@@ -110,11 +116,13 @@ namespace TowerDefense
                 }
             }
 
+            ClearTowerButtons();
+            ResetPurchaseButtons();
+            ClearMessageDisplay();
+
             TDSession.thisSession = new TDSession();
             SessionThread = new Thread(new ThreadStart(TDSession.thisSession.Play));
             SessionThread.Start();
-            ClearTowerButtons();
-            ResetPurchaseButtons();
         }
         #endregion
 
@@ -174,6 +182,12 @@ namespace TowerDefense
                 TDTowerCreator pop = new TDTowerCreator();
                 pop.FormClosed += pop_FormClosed;
                 pop.Show();
+
+                // clear selection and details when popup closes
+                UnhighlightAll();
+                ClearDetails();
+                ResetPurchaseButtons();
+                ResetAIButtons();
             }
         }
         void pop_FormClosed(object sender, FormClosedEventArgs e)
@@ -218,6 +232,7 @@ namespace TowerDefense
         private void panelAction_Click(object sender, EventArgs e)
         {
             MouseEventArgs m = (e as MouseEventArgs);
+            bool shiftPressed = Control.ModifierKeys.HasFlag(Keys.Shift);
 
             // placing a tower
             if (this._CursorState == CursorStates.PlaceTower)
@@ -231,9 +246,12 @@ namespace TowerDefense
 
                 if (TDSession.thisSession.CurrentLevel.CanPlaceTower(newTower))
                 {
+                    // actually place the tower
                     placeTower((e as MouseEventArgs).Location);
 
-                    if (m.Button == System.Windows.Forms.MouseButtons.Left)
+                    // and after we place the tower, unselect the tower if we did not have shift down (or right clicked)
+                    if (m.Button == System.Windows.Forms.MouseButtons.Left &&
+                        !shiftPressed)
                     {
                         this.CursorState = CursorStates.Normal;
                         GetSelectedTowerButton().Checked = false;
@@ -437,16 +455,16 @@ namespace TowerDefense
         }
         internal void DisplayLevelWin(int lvl)
         {
-            MessageBox.Show("You have won level " + lvl + "!");
+            DisplayMessage($"Level {lvl} passed!");
         }
         internal void DisplayLoss()
         {
-            MessageBox.Show("You have lost!");
+            DisplayMessage("Game Over");
 
             TDSession.thisSession.End();
             TDSession.thisSession = null;
-            //SessionThread.Join();
         }
+
         public void SetLabelText(Label lbl, string text)
         {
             if (lbl.InvokeRequired)
@@ -487,6 +505,28 @@ namespace TowerDefense
                 try
                 {
                     c.Enabled = State;
+                }
+                catch { }
+            }
+        }
+        public void SetControlVisibility(Control c, bool vis)
+        {
+            if (c.InvokeRequired)
+            {
+                try
+                {
+                    this.Invoke(new EventHandler(delegate
+                    {
+                        c.Visible = vis;
+                    }));
+                }
+                catch { }
+            }
+            else
+            {
+                try
+                {
+                    c.Visible = vis;
                 }
                 catch { }
             }
@@ -673,6 +713,10 @@ namespace TowerDefense
                 SetControlState(this.btnDelete,false);
             }
         }
+        private void ClearMessageDisplay()
+        {
+            SetControlVisibility(lblLevelOutcome, false);
+        }
 
         private void SetTowerButtonState(TDTowerButton b)
         {
@@ -698,7 +742,6 @@ namespace TowerDefense
                 SetControlState(b, false);
             }
         }
-
         private void SetControlChecked(CheckBox c, bool State)
         {
             if (c.InvokeRequired)
@@ -739,6 +782,21 @@ namespace TowerDefense
                 SetControlState(btnAIFar, false);
             }
         }
+
+        private void DisplayMessage(string msg)
+        {
+            SetControlVisibility(lblLevelOutcome, true);
+            SetLabelText(lblLevelOutcome, msg);
+            MessageTimer.Enabled = true;
+            MessageTimer.Start();
+        }
+        private void MessageTimer_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("timer ticked, hiding lbl...");
+            SetControlVisibility(lblLevelOutcome, false);
+            MessageTimer.Stop(); // we only show the message once.
+        }
+
         #endregion
 
         #region Drawing actionPanel

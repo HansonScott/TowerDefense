@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TDForm));
             this.panelAction = new System.Windows.Forms.Panel();
+            this.lblLevelOutcome = new System.Windows.Forms.Label();
             this.panelTools = new System.Windows.Forms.Panel();
             this.btnSpeed_Super = new System.Windows.Forms.Button();
             this.btnSpeed_Fast = new System.Windows.Forms.Button();
@@ -83,6 +84,7 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionSpeedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panelAction.SuspendLayout();
             this.panelTools.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sessionSpeedBindingSource)).BeginInit();
@@ -94,6 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAction.AutoScroll = true;
+            this.panelAction.Controls.Add(this.lblLevelOutcome);
             this.panelAction.Cursor = System.Windows.Forms.Cursors.Cross;
             this.panelAction.Location = new System.Drawing.Point(12, 32);
             this.panelAction.Name = "panelAction";
@@ -101,6 +104,19 @@
             this.panelAction.TabIndex = 0;
             this.panelAction.Click += new System.EventHandler(this.panelAction_Click);
             this.panelAction.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelAction_MouseMove);
+            // 
+            // lblLevelOutcome
+            // 
+            this.lblLevelOutcome.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblLevelOutcome.AutoSize = true;
+            this.lblLevelOutcome.BackColor = System.Drawing.Color.Transparent;
+            this.lblLevelOutcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevelOutcome.Location = new System.Drawing.Point(246, 191);
+            this.lblLevelOutcome.Name = "lblLevelOutcome";
+            this.lblLevelOutcome.Size = new System.Drawing.Size(403, 63);
+            this.lblLevelOutcome.TabIndex = 0;
+            this.lblLevelOutcome.Text = "Level Outcome";
+            this.lblLevelOutcome.Visible = false;
             // 
             // panelTools
             // 
@@ -162,7 +178,7 @@
             this.btnSpeed_Super.Name = "btnSpeed_Super";
             this.btnSpeed_Super.Size = new System.Drawing.Size(37, 23);
             this.btnSpeed_Super.TabIndex = 4;
-            this.btnSpeed_Super.Text = ">>>";
+            this.btnSpeed_Super.Text = "x3";
             this.btnSpeed_Super.UseVisualStyleBackColor = true;
             this.btnSpeed_Super.Click += new System.EventHandler(this.btnSpeed_Super_Click);
             // 
@@ -173,7 +189,7 @@
             this.btnSpeed_Fast.Name = "btnSpeed_Fast";
             this.btnSpeed_Fast.Size = new System.Drawing.Size(37, 23);
             this.btnSpeed_Fast.TabIndex = 3;
-            this.btnSpeed_Fast.Text = ">>";
+            this.btnSpeed_Fast.Text = "x2";
             this.btnSpeed_Fast.UseVisualStyleBackColor = true;
             this.btnSpeed_Fast.Click += new System.EventHandler(this.btnSpeed_Fast_Click);
             // 
@@ -710,6 +726,8 @@
             this.Text = "Tower Defense";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TDForm_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TDForm_ResizeEnd);
+            this.panelAction.ResumeLayout(false);
+            this.panelAction.PerformLayout();
             this.panelTools.ResumeLayout(false);
             this.panelTools.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -774,6 +792,7 @@
         private System.Windows.Forms.Button btnSpeed_Fast;
         private System.Windows.Forms.Button btnSpeed_Normal;
         private System.Windows.Forms.Button btnSpeed_Paused;
+        private System.Windows.Forms.Label lblLevelOutcome;
     }
 }
 
