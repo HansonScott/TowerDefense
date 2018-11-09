@@ -80,16 +80,19 @@ namespace TowerDefense
                 }
 
                 // draw HP
-                HPPen.Color = GetColorForCurrentHP(this.HPCurrent, this.HPMax);
-                HPSize = GetLineSizeForCurrentHP(this.HPCurrent, this.HPMax, this.Size);
-
-                if (HPSize > 0)
+                if (this.HPCurrent != this.HPMax)
                 {
-                    g.DrawLine(HPPen,
-                        (int)Location.X - (HPSize / 2),
-                        (int)Location.Y - (Size / 2) - HPPen.Width,  // just above location
-                        (int)Location.X + (HPSize / 2),
-                        (int)Location.Y - (Size / 2) - HPPen.Width);  // just above location
+                    HPPen.Color = GetColorForCurrentHP(this.HPCurrent, this.HPMax);
+                    HPSize = GetLineSizeForCurrentHP(this.HPCurrent, this.HPMax, this.Size);
+
+                    if (HPSize > 0)
+                    {
+                        g.DrawLine(HPPen,
+                            (int)Location.X - (HPSize / 2),
+                            (int)Location.Y - (Size / 2) - HPPen.Width,  // just above location
+                            (int)Location.X + (HPSize / 2),
+                            (int)Location.Y - (Size / 2) - HPPen.Width);  // just above location
+                    }
                 }
             }
             catch{}
