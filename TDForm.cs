@@ -84,9 +84,6 @@ namespace TowerDefense
             DrawTimer.Tick += OnDrawTimer;
             DrawTimer.Interval = (1000/MaxFPS);
             DrawTimer.Start();
-
-            MessageTimer.Tick += MessageTimer_Tick;
-            MessageTimer.Interval = MessageDuration;
         }
 
         private void OnDrawTimer(object sender, System.EventArgs e)
@@ -119,6 +116,7 @@ namespace TowerDefense
             ClearTowerButtons();
             ResetPurchaseButtons();
             ClearMessageDisplay();
+            this.btnNewTower.Enabled = true;
 
             TDSession.thisSession = new TDSession();
             SessionThread = new Thread(new ThreadStart(TDSession.thisSession.Play));
@@ -455,13 +453,14 @@ namespace TowerDefense
         }
         internal void DisplayLevelWin(int lvl)
         {
-            DisplayMessage($"Level {lvl} passed!");
+            MessageBox.Show($"Level {lvl} passed!");
         }
         internal void DisplayLoss()
         {
-            DisplayMessage("Game Over");
+            MessageBox.Show("Game Over");
 
             TDSession.thisSession.End();
+            TDForm.ThisForm.SetControlState(btnNewTower, false);
             TDSession.thisSession = null;
         }
 
@@ -782,21 +781,6 @@ namespace TowerDefense
                 SetControlState(btnAIFar, false);
             }
         }
-
-        private void DisplayMessage(string msg)
-        {
-            SetControlVisibility(lblLevelOutcome, true);
-            SetLabelText(lblLevelOutcome, msg);
-            MessageTimer.Enabled = true;
-            MessageTimer.Start();
-        }
-        private void MessageTimer_Tick(object sender, EventArgs e)
-        {
-            MessageBox.Show("timer ticked, hiding lbl...");
-            SetControlVisibility(lblLevelOutcome, false);
-            MessageTimer.Stop(); // we only show the message once.
-        }
-
         #endregion
 
         #region Drawing actionPanel
